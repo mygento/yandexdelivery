@@ -158,7 +158,10 @@ class Mygento_Yandexdelivery_Adminhtml_Yandexdelivery_ApiController extends Mage
         $result = Mage::getModel('yandexdelivery/carrier')->getSenderOrderLabel($ydId);
 
         if ($result->status == "ok") {
+            // @codingStandardsIgnoreStart
             $data = base64_decode($result->data);
+            // @codingStandardsIgnoreEnd
+
             return $this->_prepareDownloadResponse('yandexdelivery_' . $ydId . '.pdf', $data, 'application/pdf');
         }
         $this->getResponse()->setBody(Mage::helper('yandexdelivery')->__('Error getting order PDF'));
