@@ -1,0 +1,124 @@
+<?php
+$checkoutPrefix = '';
+$quote = Mage::getSingleton('checkout/session')->getQuote();
+$totals = $quote->getTotals();
+?>
+<script type="text/javascript">
+    var yd_prefix_type = '';
+    window.deliveryTypes = [<?php echo implode(',', Mage::getModel('yandexdelivery/carrier')->getTypes(true)); ?>];
+    console.log(window.deliveryTypes);
+    yd_debug = <?php echo Mage::getStoreConfig('carriers/yandexdelivery/debug') ? 'true' : 'false' ?>;
+    ydwidget.ready(function () {
+        ydwidget.initCartWidget({
+            'getCity': function () {
+                var city = '<?php echo $quote->getShippingAddress()->getCity(); ?>';
+                if (city) {
+                    return {value: city};
+                } else {
+                    return false;
+                }
+            },
+            'order': {
+                //объявленная ценность заказа
+                'order_assessed_value': <?php echo $totals["grand_total"]->getValue() ?>,
+                //флаг отправки заказа через единый склад. По умолчанию, параметр берется из настроек личного кабинета, но при указании имеет больший приоритет и настройки в личном кабинете не учитываются.
+                'delivery_to_yd_warehouse': 1,
+                // Товарные позиции в заказе (возможные).
+                // Можно указывать и другие поля, см. объект OrderItem в Справочнике API корзинного 
+                //виджета.
+                'order_items': function () {
+                    var items = [];
+<?php foreach ($quote->getAllVisibleItems() as $_item) : ?>
+                        items.push({
+                            'orderitem_name': '<?php echo $_item->getName(); ?>',
+                            'orderitem_quantity': <?php echo $_item->getQty(); ?>,
+                            'orderitem_cost': <?php echo round($_item->getPrice(), 2); ?>
+                        });
+<?php endforeach; ?>
+                    return items;
+                }
+            },
+            //id элемента-контейнера
+            'el': 'ydwidget',
+            //только ПВЗ
+            'onlyPickuppoints': true,
+            //габариты 1 единицы усредненного товара
+            'length': <?php echo round(Mage::getStoreConfig('carriers/yandexdelivery/fonelength'), 0); ?>,
+            'width': <?php echo round(Mage::getStoreConfig('carriers/yandexdelivery/fonewidth'), 0); ?>,
+            'height': <?php echo round(Mage::getStoreConfig('carriers/yandexdelivery/foneheight'), 0); ?>,
+            //габариты и количество по каждому товару в корзине
+            'itemsDimensions': function () {
+                return [
+<?php
+$processed_dimensions = Mage::helper('yandexdelivery')->getSizes($quote->getAllVisibleItems(), true);
+foreach ($processed_dimensions['dimensions'] as $_item) {
+    echo '[' . $_item['L'] . ',' . $_item['W'] . ',' . $_item['H'] . ',' . 1 . '],' . "\n";
+}
+?>
+                ];
+            },
+            //общее количество товаров в корзине
+            'totalItemsQuantity': function () {
+                return <?php echo count($processed_dimensions['dimensions']) . ';'; ?>
+            },
+            //общий вес товаров в корзине
+            'weight': function () {
+                return <?php echo $processed_dimensions['weight'] . ';'; ?>
+            },
+            //общая стоимость товаров в корзине
+            'cost': function () {
+                return <?php echo $totals["grand_total"]->getValue() . ';'; ?>
+            },
+            //Функция, вызывающаяся по завершению загрузки корзинного виджета.
+            onLoad: function () {
+                console.log(yd_prefix_type);
+//                ydwidget.cartWidget.changeDeliveryTypes(yd_pre_type);
+            },
+            //Способы доставки. Влияют на предлагаемые в виджете варианты способов доставки.
+            onlyDeliveryTypes: function () {
+                return window.deliveryTypes;
+            },
+            //обработка смены варианта доставки
+            'onDeliveryChange': function (delivery) {
+                //если выбран вариант доставки, выводим его описание и закрываем виджет, иначе произошел сброс варианта,
+                //делаем выбор метода
+                if (delivery) {
+                    if (console) {
+                        console.log(delivery);
+                    }
+                    if (delivery.type == 'TODOOR') {
+                        method = jQuery('#s_method_yandexdelivery_todoor_' + delivery.tariffId + '_' + delivery.direction + '_' + delivery.delivery.id);
+                    }
+                    if (delivery.type == 'POST') {
+                        method = jQuery('#s_method_yandexdelivery_post_' + delivery.tariffId + '_' + delivery.direction + '_' + delivery.delivery.id);
+                    }
+                    if (delivery.type == 'PICKUP') {
+                        method = jQuery('#s_method_yandexdelivery_pickup_' + delivery.tariffId + '_' + delivery.direction + '_' + delivery.delivery_id + '_' + delivery.id);
+                    }
+                    if (yd_debug) {
+                        console.log(method);
+                    }
+                    if (method.length) {
+                        jQuery('#yd_selection_input, #yd_selection_label').removeAttr('id');
+                        method.trigger('click');
+                        method.attr('id', 'yd_selection_input');
+                        method.parent().find('label').attr('id', 'yd_selection_label');
+                    } else {
+                        if (yd_debug) {
+                            console.log('YANDEXDELIVERY: NO METHOD TO SELECT');
+                        }
+                    }
+                    ydwidget.cartWidget.close();
+                } else {
+                    //doing nothing here
+                }
+            }
+        });
+    });</script>
+<div id="ydwidget" class="yd-widget-modal"></div>
+<script type="text/javascript">
+<?php foreach (Mage::getModel('yandexdelivery/carrier')->getTypes() as $ydType) : ?>
+        ydMethodAdd('<?php echo $ydType; ?>', '<?php echo Mage::getStoreConfig('carriers/yandexdelivery_' . $ydType . '/title'); ?>', '<?php echo Mage::getStoreConfig('carriers/yandexdelivery_' . $ydType . '/button_title'); ?>');
+<?php endforeach; ?>
+    changeT();
+</script>

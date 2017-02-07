@@ -1,0 +1,220 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Mygento_Yandexdelivery>
+            <version>1.0.1</version>
+        </Mygento_Yandexdelivery>
+    </modules>
+    <global>
+        <models>
+            <yandexdelivery>
+                <class>Mygento_Yandexdelivery_Model</class>
+                <resourceModel>yandexdelivery_resource</resourceModel>
+            </yandexdelivery>
+            <yandexdelivery_resource>
+                <class>Mygento_Yandexdelivery_Model_Resource</class>
+                <deprecatedNode>yandexdelivery_mysql4</deprecatedNode>
+                <entities>
+                    <sender>
+                        <table>mygento_yandexdelivery_sender</table>
+                    </sender>
+                    <warehouse>
+                        <table>mygento_yandexdelivery_warehouse</table>
+                    </warehouse>
+                    <requisite>
+                        <table>mygento_yandexdelivery_requisite</table>
+                    </requisite>
+                    <shipment>
+                        <table>mygento_yandexdelivery_shipment</table>
+                    </shipment>
+                </entities>
+            </yandexdelivery_resource>
+        </models>
+        <helpers>
+            <yandexdelivery>
+                <class>Mygento_Yandexdelivery_Helper</class>
+            </yandexdelivery>
+        </helpers>
+        <blocks>
+            <yandexdelivery>
+                <class>Mygento_Yandexdelivery_Block</class>
+            </yandexdelivery>
+        </blocks>
+        <resources>
+            <yandexdelivery_setup>
+                <setup>
+                    <module>Mygento_Yandexdelivery</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </yandexdelivery_setup>
+            <yandexdelivery_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </yandexdelivery_write>
+            <yandexdelivery_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </yandexdelivery_read>
+        </resources>
+        <events>
+            <admin_system_config_changed_section_carriers>
+                <observers>
+                    <yandexdelivery>
+                        <type>singleton</type>
+                        <class>yandexdelivery/observer</class>
+                        <method>handleSave</method>
+                    </yandexdelivery>
+                </observers>
+            </admin_system_config_changed_section_carriers>
+        </events>
+    </global>
+    <default>
+        <carriers>
+            <yandexdelivery>
+                <debug>0</debug>
+                <onlyone>0</onlyone>
+                <itemweight>weight</itemweight>
+                <fonelength>10</fonelength>
+                <fonewidth>10</fonewidth>
+                <foneheight>10</foneheight>
+                <foneweight>0.5</foneweight>
+                <homecity>Москва</homecity>
+                <flush>0</flush>
+                <yd_warehouse>0</yd_warehouse>
+            </yandexdelivery>
+            <yandexdelivery_todoor>
+                <active>1</active>
+                <model>yandexdelivery/carrier_todoor</model>
+                <name>Яндекс Доставка Курьер</name>
+                <sort_order>30</sort_order>
+                <button_title>Нажмите для выбора</button_title>
+            </yandexdelivery_todoor>
+            <yandexdelivery_pickup>
+                <active>1</active>
+                <model>yandexdelivery/carrier_pickup</model>
+                <name>Яндекс Доставка Самовывоз</name>
+                <sort_order>31</sort_order>
+                <button_title>Нажмите для выбора</button_title>
+            </yandexdelivery_pickup>
+            <yandexdelivery_post>
+                <active>1</active>
+                <model>yandexdelivery/carrier_post</model>
+                <name>Яндекс Доставка Самовывоз</name>
+                <sort_order>32</sort_order>
+                <button_title>Нажмите для выбора</button_title>
+            </yandexdelivery_post>
+        </carriers>
+    </default>
+    <adminhtml>
+        <translate>
+            <modules>
+                <yandexdelivery>
+                    <files>
+                        <default>Mygento_Yandexdelivery.csv</default>
+                    </files>
+                </yandexdelivery>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <yandexdelivery>
+                    <file>mygento/yandexdelivery.xml</file>
+                </yandexdelivery>
+            </updates>
+        </layout>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <catalog module="catalog">
+                            <title>Catalog</title>
+                            <sort_order>80</sort_order>
+                            <children>
+                                <yandexdelivery module="yandexdelivery">
+                                    <title>Yandex Delivery</title>
+                                    <sort_order>22</sort_order>
+                                    <children>
+                                        <shipment module="yandexdelivery">
+                                            <title>Manage Shipments</title>
+                                            <sort_order>22</sort_order>
+                                        </shipment>
+                                        <api module="yandexdelivery">
+                                            <title>Use API</title>
+                                            <sort_order>50</sort_order>
+                                        </api>
+                                    </children>
+                                </yandexdelivery>
+                            </children>
+                        </catalog>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <menu>
+            <catalog module="catalog">
+                <title>Catalog</title>
+                <sort_order>30</sort_order>
+                <children>
+                    <yandexdelivery module="yandexdelivery">
+                        <title>Yandex Delivery</title>
+                        <sort_order>22</sort_order>
+                        <children>
+                            <shipment module="yandexdelivery">
+                                <title>Manage Shipments</title>
+                                <sort_order>22</sort_order>
+                                <action>adminhtml/yandexdelivery_shipment</action>
+                            </shipment>
+                        </children>
+                    </yandexdelivery>
+                </children>
+            </catalog>
+        </menu>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <yandexdelivery after="Mage_Adminhtml">Mygento_Yandexdelivery_Adminhtml</yandexdelivery>
+                        <frontName>yandexdelivery</frontName>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <frontend>
+        <translate>
+            <modules>
+                <yandexdelivery>
+                    <files>
+                        <default>Mygento_Yandexdelivery.csv</default>
+                    </files>
+                </yandexdelivery>
+            </modules>
+        </translate>
+        <routers>
+            <yandexdelivery>
+                <use>standard</use>
+                <args>
+                    <module>Mygento_Yandexdelivery</module>
+                    <frontName>yandexdelivery</frontName>
+                </args>
+            </yandexdelivery>
+        </routers>
+        <layout>
+            <updates>
+                <yandexdelivery>
+                    <file>mygento/yandexdelivery.xml</file>
+                </yandexdelivery>
+            </updates>
+        </layout>
+    </frontend>
+    <!--    <crontab>
+        <jobs>
+        </jobs>
+    </crontab>-->
+</config>

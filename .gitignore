@@ -1,0 +1,29 @@
+.DS_Store
+/magento.py
+/magento.rb
+/vendor/
+/node_modules
+
+*.map
+
+#composer
+composer.lock 
+
+#unit testing
+/app/code/community/EcomDev/
+/lib/EcomDev
+/lib/Spyc
+/lib/vfsStream
+/shell/ecomdev-phpunit.php
+/app/etc/modules/EcomDev_PHPUnit.xml
+/app/etc/modules/EcomDev_PHPUnitTest.xml
+phpcbf-fixed.diff
+
+#base
+app/code/community/Mygento/Base
+app/etc/modules/Mygento_Base.xml
+app/locale/ru_RU/Mygento_Base.csv
+skin/adminhtml/default/default/images/mygento/base/logo.png
+/.idea/
+/cartWidgetDemo (1) (1).html
+sss.php

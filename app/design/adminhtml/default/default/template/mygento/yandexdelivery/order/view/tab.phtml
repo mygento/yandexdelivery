@@ -1,0 +1,154 @@
+<?php if ($this->isShippedBy()): ?>
+    <?php $yandexShipment = Mage::getModel('yandexdelivery/carrier')->getShipment($this->getOrder()->getId()); ?>
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-products">
+                <?php echo Mage::helper('yandexdelivery')->__('Yandexdelivery shipping'); ?>
+            </h4>
+        </div>
+        <div class="grid np">
+            <div class="hor-scroll">
+                <?php echo $this->getTable(); ?>
+            </div>
+        </div>
+        <br/>
+        <?php if ($this->getOrder()->canShip()): ?>
+            <?php if (!$yandexShipment || !$yandexShipment->getYdId()): ?>
+                <?php
+                $form = new Varien_Data_Form([
+                    'id' => 'yandexdelivery_form',
+                    'action' => $this->getSendOrderUrl(),
+                    'method' => 'post'
+                ]);
+                $form->setUseContainer(true);
+
+                $date = new Varien_Data_Form_Element_Date(
+                        [
+                    'id' => 'data',
+                    'name' => 'date',
+                    'label' => Mage::helper('yandexdelivery')->__('Shipment date'),
+                    'tabindex' => 1,
+                    'image' => $this->getSkinUrl('images/grid-cal.gif'),
+                    'format' => Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT),
+                    'value' => date(
+                            Mage::app()->getLocale()->getDateStrFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT), strtotime('tomorrow')
+                    )]
+                );
+                $date->setId('date');
+
+                $warehouse = new Varien_Data_Form_Element_Select([
+                    'name' => 'warehouse',
+                    'title' => 'warehouse',
+                    'options' => Mage::helper('yandexdelivery')->toOptionsArray('warehouse'),
+                    'value' => Mage::getStoreConfig('carriers/yandexdelivery/warehouse'),
+                    'label' => Mage::helper('yandexdelivery')->__('Choose warehouse'),
+                    'id' => 'warehouse',
+                ]);
+                $warehouse->setId('warehouse');
+
+                $sender = new Varien_Data_Form_Element_Select([
+                    'name' => 'sender',
+                    'title' => 'sender',
+                    'options' => Mage::helper('yandexdelivery')->toOptionsArray('sender'),
+                    'value' => Mage::getStoreConfig('carriers/yandexdelivery/sender'),
+                    'label' => Mage::helper('yandexdelivery')->__('Choose sender'),
+                    'id' => 'sender',
+                ]);
+                $sender->setId('sender');
+
+                $requisite = new Varien_Data_Form_Element_Select([
+                    'name' => 'requisite',
+                    'title' => 'requisite',
+                    'options' => Mage::helper('yandexdelivery')->toOptionsArray('requisite'),
+                    'value' => Mage::getStoreConfig('carriers/yandexdelivery/requisite'),
+                    'label' => Mage::helper('yandexdelivery')->__('Choose requisite'),
+                    'id' => 'requisite',
+                ]);
+                $requisite->setId('requisite');
+
+
+                $type = new Varien_Data_Form_Element_Select([
+                    'name' => 'type',
+                    'title' => 'type',
+                    'options' => Mage::getModel('yandexdelivery/source_type')->toOptionsArray(),
+                    'value' => Mage::getStoreConfig('carriers/yandexdelivery/type'),
+                    'label' => Mage::helper('yandexdelivery')->__('Dispatch type'),
+                    'id' => 'type',
+                ]);
+                $type->setId('type');
+
+                $hidden = new Varien_Data_Form_Element_Hidden([
+                    'name' => 'orderid',
+                    'disabled' => true,
+                    'value' => $this->getOrder()->getId()
+                ]);
+                $hidden->setId('hidden');
+
+                $submit = new Varien_Data_Form_Element_Submit(
+                        ['value' => Mage::helper('yandexdelivery')->__('Send template and confirm order shipment')]);
+                $submit->setId('submit');
+
+                $street = new Varien_Data_Form_Element_Text([
+                    'name' => 'street',
+                    'value' => $this->getOrder()->getShippingAddress()->getStreetFull(),
+                    'label' => Mage::helper('yandexdelivery')->__('Destination street'),
+                    'class' => 'required-entry'
+                ]);
+
+                $street->setId('street');
+
+                $house = new Varien_Data_Form_Element_Text([
+                    'name' => 'house',
+                    'label' => Mage::helper('yandexdelivery')->__('Destination house'),
+                    'class' => 'required-entry'
+                ]);
+
+                $house->setId('house');
+
+                $form->addElement($hidden);
+                $form->addElement($requisite);
+                $form->addElement($sender);
+                $form->addElement($warehouse);
+                $form->addElement($type);
+                $form->addElement($date);
+                $form->addElement($street);
+                $form->addElement($house);
+                $form->addElement($submit);
+
+                echo $form->toHtml();
+                ?>
+                <script type="text/javascript">
+                    //< ![CDATA[
+                    var ydForm = new varienForm('yandexdelivery_form');
+                    //]]>
+                </script>
+            <?php else: ?> 
+                <?php
+                echo $this->getLayout()->createBlock('adminhtml/widget_button')
+                        ->setData([
+                            'label' => Mage::helper('yandexdelivery')->__('View order in Yandex Delivery'),
+                            'onclick' => 'window.open(\'https://delivery.yandex.ru/order/create?id=' . $yandexShipment->getYdId() . '\')',
+                            'class' => 'task'
+                        ])->toHtml() . "\n";
+                ?>
+                <?php if (!$yandexShipment->getParcelId()): ?>
+                    <?php echo $this->getAjaxButton('confirmorder', 'Confirm order', $this->getConfirmOrderUrl()); ?>
+                <?php else: ?>
+                    <?php
+                    echo $this->getLayout()->createBlock('adminhtml/widget_button')
+                            ->setData([
+                                'label' => Mage::helper('yandexdelivery')->__('Get label PDF'),
+                                'onclick' => 'window.open(\'' . $this->getLabelUrl() . '\')',
+                                'class' => 'task'
+                            ])->toHtml() . "\n";
+                    ?>
+                    <?php echo $this->getAjaxButton('deleteorder', 'Delete order', $this->getDeleteOrderUrl()); ?>
+                <?php endif; ?>
+            <?php endif; ?>
+        <?php else: ?> 
+
+        <?php endif; ?>
+    </div>
+<?php else: ?>
+    <p><?php echo $this->__('This order can\'t be shipped'); ?></p>
+<?php endif; ?>

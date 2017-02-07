@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<info>
+    <versions>
+        <version>
+            <date>1 февраля 2017г.</date>
+            <comment>Публичный релиз</comment>
+            <ver>1.0.1</ver>
+        </version>
+        <version>
+            <date>1 июля 2015г.</date>
+            <comment>Релиз модуля</comment>
+            <ver>1.0.0</ver>
+        </version>
+    </versions>
+    <options>
+        <short_description><![CDATA[]]></short_description>
+        <supportedversions>1.6.0.1 - 1.9.x</supportedversions>
+        <supportee>1.12 - 1.14</supportee>
+        <price>0</price>
+        <meta_title>Яндекс.Доставка для Magento</meta_title>
+        <meta_keyword>яндекс, yandex, доставка, delivery, magento</meta_keyword>
+        <meta_description>Интеграция Яндекс.Доставки в Magento</meta_description>
+    </options>
+</info>

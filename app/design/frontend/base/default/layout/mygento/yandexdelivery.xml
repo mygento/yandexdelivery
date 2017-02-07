@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 NKS LLC. (http://www.mygento.ru)
+ * License: GPLv2
+ * Package: Mygento_Yandexdelivery
+ */
+-->
+<layout version="0.1.0">
+    <checkout_onepage_index>
+        <reference name="head">
+            <action method="addJs" ifconfig="carriers/yandexdelivery/jquery">
+                <script>jquery/jquery-2.1.4.min.js</script>
+            </action>
+            <action method="addJs" ifconfig="carriers/yandexdelivery/jquery">
+                <script>jquery/mygento/jquery.init.js</script>
+            </action>
+            <action method="addJs" ifconfig="carriers/yandexdelivery/jqueryui">
+                <script>jquery/jqueryui/jquery-ui.min.js</script>
+            </action>
+            <action method="addItem" ifconfig="carriers/yandexdelivery/jqueryui">
+                <type>js_css</type>
+                <name>jquery/jqueryui/jquery-ui.min.css</name>
+            </action>
+            <action method="addItem" ifconfig="carriers/yandexdelivery/json">
+                <type>skin_js</type>
+                <name>js/mygento/yandexdelivery.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/mygento/yandexdelivery.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/mygento/yandexdelivery_pvz.css</name>
+            </action>
+            <block type="core/template" name="yandexdeliverywidget" template="mygento/yandexdelivery/widget.phtml" />
+        </reference>
+    </checkout_onepage_index>
+
+    <checkout_onepage_additional>
+        <reference name="root">
+            <block type="yandexdelivery/shipping" output="toHtml" name="yandexdelivery_shiping" as="shipping" template="mygento/yandexdelivery/shipping.phtml" after='-'/>
+        </reference>
+    </checkout_onepage_additional>
+    
+    <checkout_cart_index>
+        <reference name="head">
+            <block type="core/template" name="yandexdeliverywidget" template="mygento/yandexdelivery/widget.phtml" />
+        </reference>
+    </checkout_cart_index>
+</layout>

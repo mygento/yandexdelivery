@@ -1,0 +1,10 @@
+<?php
+if (Mage::getStoreConfig('carriers/yandexdelivery/active')) {
+    echo Mage::getStoreConfig('carriers/yandexdelivery/widget');
+}
+if (Mage::getStoreConfig('carriers/yandexdelivery/json')):
+    ?>
+    <script type="text/javascript">
+        var MYGENTO_YANDEXDELIVERY_BASE_URL = '<?php echo Mage::getBaseUrl(); ?>';
+    </script>
+<?php endif; ?>

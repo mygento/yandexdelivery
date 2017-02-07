@@ -1,0 +1,11 @@
+/*
+    Mygento_Yandexdelivery http://www.mygento.ru
+    Copyright 2017 NKS LLC
+    License GPLv2
+*/
+[value^="yandexdelivery_"],[for^="s_method_yandexdelivery_"] {
+    display: none !important;
+}
+#yd_selection_label,#yd_selection_input{
+    display: inline-block !important;
+}

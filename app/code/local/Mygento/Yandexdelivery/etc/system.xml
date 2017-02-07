@@ -1,0 +1,787 @@
+<config>
+    <sections>
+        <carriers>
+            <groups>
+                <yandexdelivery translate="label" module="yandexdelivery">
+                    <label>Yandex Delivery</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>99</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <!--основная секция-->
+                        <versioninfo>
+                            <frontend_model>yandexdelivery/version</frontend_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </versioninfo>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <active_backend translate="label">
+                            <label>Enabled in backend</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active_backend>
+                        <heading_1 translate="label">
+                            <label>API credentials</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_1>
+                        <keys translate="label">
+                            <label>API keys</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                                <![CDATA[<a href="https://delivery.yandex.ru/integration/index" target="_blank">https://delivery.yandex.ru/integration/index</a>]]></comment>
+                            <tooltip>Just copy, paste and press Save Config</tooltip>
+                        </keys>
+                        <ids translate="label">
+                            <label>API ids</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                                <![CDATA[<a href="https://delivery.yandex.ru/integration/index" target="_blank">https://delivery.yandex.ru/integration/index</a>]]></comment>
+                            <tooltip>Just copy, paste and press Save Config</tooltip>
+                        </ids>
+                        <widget translate="label">
+                            <label>Cart widget code</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>121</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                                <![CDATA[<a href="https://delivery.yandex.ru/integration/index" target="_blank">https://delivery.yandex.ru/integration/index</a>]]></comment>
+                            <tooltip>Just copy, paste and press Save Config</tooltip>
+                        </widget>
+                        <heading_2 translate="label">
+                            <label>API keys data</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_2>
+                        <client_id translate="label">
+                            <label>Client ID</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>201</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </client_id>
+                        <sender translate="label">
+                            <label>Default sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>yandexdelivery/sender</source_model>
+                            <sort_order>202</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sender>
+                        <warehouse translate="label">
+                            <label>Default warehouse</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>yandexdelivery/warehouse</source_model>
+                            <sort_order>203</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                        </warehouse>
+                        <requisite translate="label">
+                            <label>Default requisite</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>yandexdelivery/requisite</source_model>
+                            <sort_order>204</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                        </requisite>
+                        <flush translate="label">
+                            <label>Flush all caches after settings saving</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>205</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If you have FPC or Varnish caching - better to turn it off.</comment>
+                        </flush>
+                        <getPaymentMethods translate="label">
+                            <label>getPaymentMethods</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>210</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </getPaymentMethods>
+                        <getSenderOrders translate="label">
+                            <label>getSenderOrders</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>211</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </getSenderOrders>
+                        <getSenderOrderLabel translate="label">
+                            <label>getSenderOrderLabel</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>212</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </getSenderOrderLabel>
+                        <getSenderParcelDocs translate="label">
+                            <label>getSenderParcelDocs</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>213</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </getSenderParcelDocs>
+                        <autocomplete translate="label">
+                            <label>autocomplete</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>214</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </autocomplete>
+                        <getIndex translate="label">
+                            <label>getIndex</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>215</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </getIndex>
+                        <createOrder translate="label">
+                            <label>createOrder</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>216</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </createOrder>
+                        <updateOrder translate="label">
+                            <label>updateOrder</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>217</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </updateOrder>
+                        <deleteOrder translate="label">
+                            <label>deleteOrder</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>218</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </deleteOrder>
+                        <getSenderOrderStatus translate="label">
+                            <label>getSenderOrderStatus</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>219</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </getSenderOrderStatus>
+                        <getSenderOrderStatuses translate="label">
+                            <label>getSenderOrderStatuses</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>220</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </getSenderOrderStatuses>
+                        <getSenderInfo translate="label">
+                            <label>getSenderInfo</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>221</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </getSenderInfo>
+                        <getWarehouseInfo translate="label">
+                            <label>getWarehouseInfo</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>222</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </getWarehouseInfo>
+                        <getRequisiteInfo translate="label">
+                            <label>getRequisiteInfo</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>223</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </getRequisiteInfo>
+                        <getIntervals translate="label">
+                            <label>getIntervals</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>224</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </getIntervals>
+                        <createWithdraw translate="label">
+                            <label>createWithdraw</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>225</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </createWithdraw>
+                        <confirmSenderOrders translate="label">
+                            <label>confirmSenderOrders</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>226</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </confirmSenderOrders>
+                        <updateWithdraw translate="label">
+                            <label>updateWithdraw</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>227</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </updateWithdraw>
+                        <createImport translate="label">
+                            <label>createImport</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>228</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </createImport>
+                        <updateImport translate="label">
+                            <label>updateImport</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>229</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </updateImport>
+                        <getDeliveries translate="label">
+                            <label>getDeliveries</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>230</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </getDeliveries>
+                        <getOrderInfo translate="label">
+                            <label>getOrderInfo</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>231</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </getOrderInfo>
+                        <searchDeliveryList translate="label">
+                            <label>searchDeliveryList</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>232</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </searchDeliveryList>
+                        <confirmSenderParcels translate="label">
+                            <label>confirmSenderParcels</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>233</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </confirmSenderParcels>
+                        <searchSenderOrdersStatuses translate="label">
+                            <label>searchSenderOrdersStatuses</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>234</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </searchSenderOrdersStatuses>
+                        <getImports translate="label">
+                            <label>getImports</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>235</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </getImports>
+                        <getWithdraws translate="label">
+                            <label>getWithdraws</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>236</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </getWithdraws>
+                        <cancelImport translate="label">
+                            <label>cancelImport</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>237</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </cancelImport>
+                        <cancelWithdraw translate="label">
+                            <label>cancelWithdraw</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>238</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </cancelWithdraw>
+                        <heading_3 translate="label">
+                            <label>Delivery settings</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>300</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_3>
+                        <payment_type translate="label">
+                            <label>Payment type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>yandexdelivery/source_payment</source_model>
+                            <sort_order>330</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                        </payment_type>
+                        <yd_warehouse translate="label">
+                            <label>Dispatch from</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>yandexdelivery/source_yd</source_model>
+                            <sort_order>331</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                        </yd_warehouse>
+                        <homecity translate="label">
+                            <label>Home city</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>yandexdelivery/source_city</source_model>
+                            <sort_order>340</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </homecity>
+                        <type translate="label">
+                            <label>Default dispatch type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>yandexdelivery/source_type</source_model>
+                            <sort_order>350</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                        </type>
+                        <heading_5 translate="label">
+                            <label>Dimensions section</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </heading_5>
+                        <onlyone translate="label">
+                            <label>Calculate that we send only one default product</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>For calculating and shipping we will always send one product</comment>
+                            <sort_order>410</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </onlyone>
+                        <oneweight translate="label">
+                            <label>One weight</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>411</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                            <depends>
+                                <onlyone>1</onlyone>
+                            </depends>
+                        </oneweight>
+                        <onelength translate="label">
+                            <label>One length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>412</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                            <depends>
+                                <onlyone>1</onlyone>
+                            </depends>
+                        </onelength>
+                        <onewidth translate="label">
+                            <label>One width</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>413</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                            <depends>
+                                <onlyone>1</onlyone>
+                            </depends>
+                        </onewidth>
+                        <oneheight translate="label">
+                            <label>One height</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>414</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                            <depends>
+                                <onlyone>1</onlyone>
+                            </depends>
+                        </oneheight>
+                        <itemlength translate="label">
+                            <label>Attribute for length</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>yandexdelivery/source_attribute</source_model>
+                            <sort_order>420</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                            <depends>
+                                <onlyone>0</onlyone>
+                            </depends>
+                        </itemlength>
+                        <fonelength translate="label">
+                            <label>One length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>421</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                            <depends>
+                                <itemlength>0</itemlength>
+                                <onlyone>0</onlyone>
+                            </depends>
+                        </fonelength>
+                        <itemwidth translate="label">
+                            <label>Attribute for width</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>yandexdelivery/source_attribute</source_model>
+                            <sort_order>422</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                            <depends>
+                                <onlyone>0</onlyone>
+                            </depends>
+                        </itemwidth>
+                        <fonewidth translate="label">
+                            <label>One width</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>423</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                            <depends>
+                                <itemwidth>0</itemwidth>
+                                <onlyone>0</onlyone>
+                            </depends>
+                        </fonewidth>
+                        <itemheight translate="label">
+                            <label>Attribute for height</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>yandexdelivery/source_attribute</source_model>
+                            <sort_order>424</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                            <depends>
+                                <onlyone>0</onlyone>
+                            </depends>
+                        </itemheight>
+                        <foneheight translate="label">
+                            <label>One height</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>425</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                            <depends>
+                                <itemheight>0</itemheight>
+                                <onlyone>0</onlyone>
+                            </depends>
+                        </foneheight>
+                        <itemweight translate="label">
+                            <label>Attribute for weight</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>yandexdelivery/source_attribute</source_model>
+                            <sort_order>426</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                            <depends>
+                                <onlyone>0</onlyone>
+                            </depends>
+                        </itemweight>
+                        <foneweight translate="label">
+                            <label>One weight</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>427</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                            <depends>
+                                <itemweight>0</itemweight>
+                                <onlyone>0</onlyone>
+                            </depends>
+                        </foneweight>
+                        <weightunit translate="label">
+                            <label>Weight unit</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>yandexdelivery/source_weight</source_model>
+                            <sort_order>430</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                        </weightunit>
+                        <sizeunit translate="label">
+                            <label>Size unit</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>yandexdelivery/source_unit</source_model>
+                            <sort_order>440</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                        </sizeunit>
+                        <heading_6 translate="label">
+                            <label>Technical section</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>900</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </heading_6>
+                        <jquery translate="label">
+                            <label>Enable internal jQuery</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>910</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                        </jquery>
+                        <jqueryui translate="label">
+                            <label>Enable internal jQuery UI</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>920</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                        </jqueryui>
+                        <json translate="label">
+                            <label>Autocomplete street and city helper</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>930</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                        </json>
+                        <!--секция дебага-->
+                        <debug translate="label">
+                            <label>Debug</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1000</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </debug>
+                        <!--конец секции дебага-->
+                    </fields>
+                </yandexdelivery>
+                <yandexdelivery_todoor translate="label" module="yandexdelivery">
+                    <label>Yandex Delivery Courier</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>99</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sort_order>
+                        <button_title translate="label">
+                            <label>Button title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </button_title>
+                    </fields>
+                </yandexdelivery_todoor>
+                <yandexdelivery_pickup translate="label" module="yandexdelivery">
+                    <label>Yandex Delivery PVZ</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>99</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sort_order>
+                        <button_title translate="label">
+                            <label>Button title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </button_title>
+                    </fields>
+                </yandexdelivery_pickup>
+                <yandexdelivery_post translate="label" module="yandexdelivery">
+                    <label>Yandex Delivery Postmail</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>99</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sort_order>
+                        <button_title translate="label">
+                            <label>Button title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </button_title>
+                    </fields>
+                </yandexdelivery_post>
+            </groups>
+        </carriers>
+    </sections>
+</config>
