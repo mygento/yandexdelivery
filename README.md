@@ -1,9 +1,9 @@
 ### Модуль интеграции сервиса "Яндекс Доставка" в Magento
+*****
 
 [![Build Status](https://travis-ci.org/mygento/yandexdelivery.svg?branch=master)](https://travis-ci.org/mygento/yandexdelivery)[![Code Climate](https://codeclimate.com/github/mygento/yandexdelivery/badges/gpa.svg)](https://codeclimate.com/github/mygento/yandexdelivery)[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mygento/yandexdelivery/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mygento/yandexdelivery/?branch=master)
 
 *****
-![alt text](yandexdelivery.png)
 
 Модуль Mygento "Яндекс Доставка" может:
 
