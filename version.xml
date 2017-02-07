@@ -2,7 +2,7 @@
 <info>
     <versions>
         <version>
-            <date>1 февраля 2017г.</date>
+            <date>7 февраля 2017г.</date>
             <comment>Публичный релиз</comment>
             <ver>1.0.1</ver>
         </version>
@@ -13,8 +13,8 @@
         </version>
     </versions>
     <options>
-        <short_description><![CDATA[]]></short_description>
-        <supportedversions>1.6.0.1 - 1.9.x</supportedversions>
+        <short_description><![CDATA[Модуль Яндекс.Доставки для Magento обеспечивает лёгкую интеграцию интернет-магазина с сервисом управления логистикой.]]></short_description>
+        <supportedversions>1.7.0.2 - 1.9.x</supportedversions>
         <supportee>1.12 - 1.14</supportee>
         <price>0</price>
         <meta_title>Яндекс.Доставка для Magento</meta_title>
