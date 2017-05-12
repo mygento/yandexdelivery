@@ -8,14 +8,12 @@
  * @copyright 2017 NKS LLC. (http://www.mygento.ru)
  * @license GPLv2
  */
-class Mygento_Yandexdelivery_Model_Carrier
-{
+class Mygento_Yandexdelivery_Model_Carrier {
 
     private $_name = 'yandexdelivery';
     private $_url = 'https://delivery.yandex.ru/api/last/';
 
-    public function processApiKeys($data_string)
-    {
+    public function processApiKeys($data_string) {
         $json = json_decode(trim($data_string));
 
         if (!$json) {
@@ -30,8 +28,7 @@ class Mygento_Yandexdelivery_Model_Carrier
         }
     }
 
-    public function processApiIds($data_string)
-    {
+    public function processApiIds($data_string) {
 
         $json = json_decode(trim($data_string));
         $res = Mage::getSingleton('core/resource');
@@ -82,8 +79,7 @@ class Mygento_Yandexdelivery_Model_Carrier
      * @param string $city
      * @return json
      */
-    public function getAutocomplete($search, $type, $city = false)
-    {
+    public function getAutocomplete($search, $type, $city = false) {
         $data = [
             'term' => $search,
             'type' => $type,
@@ -101,8 +97,7 @@ class Mygento_Yandexdelivery_Model_Carrier
         return json_encode();
     }
 
-    private function getSenderInfo()
-    {
+    private function getSenderInfo() {
         $result = $this->sendRequest('getSenderInfo', [], true);
 
         if ($result->status == 'ok') {
@@ -112,8 +107,7 @@ class Mygento_Yandexdelivery_Model_Carrier
         }
     }
 
-    private function getWarehouseInfo()
-    {
+    private function getWarehouseInfo() {
         $data = [
             'warehouse_id' => Mage::helper($this->_name)->getConfigData('warehouse'),
         ];
@@ -128,8 +122,7 @@ class Mygento_Yandexdelivery_Model_Carrier
         }
     }
 
-    private function getRequisiteInfo()
-    {
+    private function getRequisiteInfo() {
         $data = [
             'requisite_id' => Mage::getStoreConfig('carriers/' . $this->_name . '/requisite')
         ];
@@ -154,8 +147,7 @@ class Mygento_Yandexdelivery_Model_Carrier
         }
     }
 
-    public function createOrder($orderId, $warehouseId, $senderId, $requisiteId, $date, $street, $house)
-    {
+    public function createOrder($orderId, $warehouseId, $senderId, $requisiteId, $date, $street, $house) {
         //создание заявки на отправку заказа в ЯД
         $order = Mage::getModel('sales/order')->load($orderId);
 
@@ -174,8 +166,7 @@ class Mygento_Yandexdelivery_Model_Carrier
         return $this->sendRequest('createOrder', $data, true, $senderId);
     }
 
-    public function getTypes($addHypes = false)
-    {
+    public function getTypes($addHypes = false) {
         $types = ['todoor', 'post', 'pickup'];
         $enabled = [];
         foreach ($types as $type) {
@@ -190,8 +181,7 @@ class Mygento_Yandexdelivery_Model_Carrier
         return $enabled;
     }
 
-    public function confirmOrders($id, $type)
-    {
+    public function confirmOrders($id, $type) {
         $data = [
             'order_ids' => $id,
             'type' => $type,
@@ -222,8 +212,7 @@ class Mygento_Yandexdelivery_Model_Carrier
      * @param int $orderId
      * @return boolean
      */
-    public function getYdId($orderId)
-    {
+    public function getYdId($orderId) {
         if ($this->getShipment($orderId)) {
             return $this->getShipment($orderId)->getYdId();
         }
@@ -235,8 +224,7 @@ class Mygento_Yandexdelivery_Model_Carrier
      * @param int $orderId
      * @return boolean
      */
-    public function getShipment($orderId)
-    {
+    public function getShipment($orderId) {
         $yd_id_collection = Mage::getModel('yandexdelivery/shipment')->getCollection();
         $yd_id_collection->addFieldToFilter('order_id', $orderId);
         $yd_id_collection->load();
@@ -251,8 +239,7 @@ class Mygento_Yandexdelivery_Model_Carrier
      * @param array $ids
      * @return boolean
      */
-    public function getYdIdsByIds($ids)
-    {
+    public function getYdIdsByIds($ids) {
         $yd_id_collection = Mage::getModel('yandexdelivery/shipment')->getCollection();
         $yd_id_collection->addFieldToFilter('id', ['in' => $ids]);
         $yd_id_collection->load();
@@ -262,8 +249,7 @@ class Mygento_Yandexdelivery_Model_Carrier
         return false;
     }
 
-    public function deleteOrder($order_id)
-    {
+    public function deleteOrder($order_id) {
         $result = $this->sendRequest('deleteOrder', ['order_id' => $order_id], true);
 
         //удаляем запись в БД в случае успеха
@@ -279,33 +265,27 @@ class Mygento_Yandexdelivery_Model_Carrier
         return $result;
     }
 
-    public function senderOrderStatuses($order_id)
-    {
+    public function senderOrderStatuses($order_id) {
         return $this->sendRequest('getSenderOrderStatuses', ['order_id' => $order_id], true);
     }
 
-    public function getSenderOrderLabel($order_id)
-    {
+    public function getSenderOrderLabel($order_id) {
         return $this->sendRequest('getSenderOrderLabel', ['order_id' => $order_id], true);
     }
 
-    public function getSenderParcelDocs($parcel_id)
-    {
+    public function getSenderParcelDocs($parcel_id) {
         return $this->sendRequest('getSenderParcelDocs', ['parcel_id' => $parcel_id], true);
     }
 
-    public function searchDeliveryList($data)
-    {
+    public function searchDeliveryList($data) {
         return $this->sendRequest('searchDeliveryList', $data, true);
     }
 
-    public function statusOrder($order_id)
-    {
+    public function statusOrder($order_id) {
         return $this->sendRequest('getOrderInfo', ['order_id' => $order_id], true);
     }
 
-    protected function sendRequest($method, $data, $sign, $sender = null)
-    {
+    protected function sendRequest($method, $data, $sign, $sender = null) {
         if ($sender) {
             $data['sender_id'] = $sender;
         } else {
@@ -314,8 +294,7 @@ class Mygento_Yandexdelivery_Model_Carrier
         return json_decode(Mage::helper($this->_name)->requestApiPost($this->_url . $method, $data, $sign, $method));
     }
 
-    protected function getOrderData($order)
-    {
+    protected function getOrderData($order) {
 
         if (Mage::getStoreConfig('carriers/' . $this->_name . '/onlyone')) {
             $weight = round(Mage::getStoreConfig('carriers/' . $this->_name . '/oneweight') * 1000 / Mage::getStoreConfig('carriers/' . $this->_name . '/weightunit'), 3);
@@ -383,12 +362,22 @@ class Mygento_Yandexdelivery_Model_Carrier
         $order_items = [];
 
         foreach ($order->getAllVisibleItems() as $item) {
-            $order_items[] = [
+            $data = [
                 'orderitem_name' => $item->getName(),
                 'orderitem_quantity' => round($item->getQtyOrdered(), 2),
                 'orderitem_cost' => $item->getRowTotalInclTax() / ceil($item->getQtyOrdered()),
                 'orderitem_article' => $item->getSku(),
             ];
+
+            //get tax info
+            if (Mage::getStoreConfig('carriers/' . $this->_name . '/tax_all')) {
+                $data['orderitem_vat_value'] = Mage::getStoreConfig('carriers/' . $this->_name . '/tax_options');
+            } else {
+                $attributeCode = Mage::getStoreConfig('carriers/' . $this->_name . '/tax_all');
+                $data['orderitem_vat_value'] = Mage::getResourceModel('catalog/product')->getAttributeRawValue($item->getProductId(), $attributeCode, $order->getStore());
+            }
+
+            $order_items[] = $data;
         }
 
         $data['order_items'] = $order_items;
@@ -396,15 +385,14 @@ class Mygento_Yandexdelivery_Model_Carrier
         return $data;
     }
 
-    protected function getSender()
-    {
+    protected function getSender() {
         return Mage::helper($this->_name)->getConfigData('sender');
     }
 
     //currently unused
 
-    public function getPaymentMethods()
-    {
+    public function getPaymentMethods() {
         return $this->sendRequest('getPaymentMethods', [], true);
     }
+
 }

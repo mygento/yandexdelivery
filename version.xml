@@ -2,6 +2,11 @@
 <info>
     <versions>
         <version>
+            <date>12 мая 2017г.</date>
+            <comment>Правки для 54 ФЗ</comment>
+            <ver>1.0.2</ver>
+        </version>
+        <version>
             <date>7 февраля 2017г.</date>
             <comment>Публичный релиз</comment>
             <ver>1.0.1</ver>
