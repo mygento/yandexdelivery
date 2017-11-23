@@ -1,7 +1,14 @@
 languages:
-  Ruby: true
+  Ruby: false
   JavaScript: true
   PHP: true
-  Python: true
+  Python: false
 exclude_paths:
 - "js/prototype/prototype.js"
+
+engines:
+  phpmd:
+    enabled: true
+    checks:
+      CleanCode/StaticAccess:
+        enabled: false
